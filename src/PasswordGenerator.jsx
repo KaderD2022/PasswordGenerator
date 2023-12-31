@@ -1,46 +1,47 @@
-
-
-
 import React, { useState } from "react";
 import ReactSwitch from "react-switch";
 
-const PasswordGenerator = () => {
+
+
+function PasswordGenerator() {
+
   const [password, setPassword] = useState("");
-  const [passwordLength, setPasswordLength] = useState(8);
+  const [passwordLength, setPasswordLength] = useState("8");
   const [includeUpperCase, setIncludeUpperCase] = useState(true);
   const [includeNumbers, setIncludeNumbers] = useState(true);
   const [includeSpecialChars, setIncludeSpecialChars] = useState(true);
 
   const generatePassword =()=>{
-    const lowerCaseChars = 'abcdefghijkmnopqrstuvwxyz';
-    const upperCaseChars = 'abcdefghijkmnopqrstuvwxyz';
+    const lowerCaseChars = 'abcdefghijklmnopqrstuuwxyz';
+    const upperCaseChars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     const numbers = '123456789';
-    const specialChars = "!@#$%^&*()";
+    const specialChars = '!@#$%^&*()';
 
     let validChars = lowerCaseChars;
     if (includeUpperCase) {
       validChars += upperCaseChars;
     }
+
     if (includeNumbers) {
       validChars += numbers;
     }
+
     if (includeSpecialChars) {
       validChars += specialChars;
     }
 
     let generatePassword = "";
-    for (let i = 0; passwordLength; i++) {
-      const randomIndex = Math.floor(Math.random() * validChars.length);
+    for (let i = 0; i < passwordLength; i++) {
+      const randomIndex = Math.floor(Math.random()* validChars.length);
       generatePassword += validChars.charAt(randomIndex);
     }
+    //console.log(generatePassword)
+
     setPassword(generatePassword);
   }
+  //generatePassword();
 
-  //generatePassword(); 
-  //setPassword("Aniket Panchat");
-  // console.log(password);
-
-  // ... rest of your component code (including event handlers, password generation logic, etc.)
+  
 
   return (
     <div className="pt-8 text-white font-bold">
@@ -85,6 +86,7 @@ const PasswordGenerator = () => {
               handleDiameter={18}
             />
           </div>
+
           <button
             onClick={generatePassword}
             className="bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 p-2 text-white font-bold rounded-md"
@@ -92,18 +94,13 @@ const PasswordGenerator = () => {
             Generate Password
           </button>
         </div>
-        <h2>{password}</h2>
-        {password && <p className="font-normal text-white" >
-          Generate Password:
-           <span className="font-bold">
-            {password}
-            </span>
-            </p>}
-        {/*         {password && 
-          <p className="font-normal text-white mt-2">
-            Generate Password<span className="font-bold">{password}</span>
+
+        {password && (
+          <p className="font-normal text-white">
+            Generate Password:   
+            <span className="font-bold"> {password}</span>
           </p>
-        } */}
+        )}
       </div>
     </div>
   );
